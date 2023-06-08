@@ -7,21 +7,21 @@ import Filter from 'components/Filter/Filter';
 import { nanoid } from 'nanoid';
 
 const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contactList')) ?? [];
-  });
+  // const [contacts, setContacts] = useState(() => {
+  //   return JSON.parse(window.localStorage.getItem('contactList')) ?? [];
+  // });
   const [filterValue, setFilterValue] = useState('');
 
-  useEffect(() => {
-    const savedContacts = localStorage.getItem('contactList');
-    if (savedContacts) {
-      setContacts(JSON.parse(savedContacts));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedContacts = localStorage.getItem('contactList');
+  //   if (savedContacts) {
+  //     setContacts(JSON.parse(savedContacts));
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('contactList', JSON.stringify([...contacts]));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contactList', JSON.stringify([...contacts]));
+  // }, [contacts]);
 
   const addContact = (name, number) => {
     const duplicateName = contacts.find(contact => contact.name === name);
