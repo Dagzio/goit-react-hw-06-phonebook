@@ -1,8 +1,11 @@
 import { Formik } from 'formik';
 import { CurrentForm, Input, Button, Label } from './ContactForm.styled';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
-const ContactForm = ({ onFormSubmit }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
   const [contactInfo, setContactInfo] = useState({
     contactName: '',
     contactNumber: '',
@@ -17,7 +20,7 @@ const ContactForm = ({ onFormSubmit }) => {
 
   const handleSubmit = () => {
     formReset();
-    onFormSubmit(contactInfo.contactName, contactInfo.contactNumber);
+    // dispatch(addContact({contactInfo.contactName, contactInfo.contactNumber}));
   };
 
   const formReset = () => {

@@ -1,8 +1,13 @@
+import { useSelector } from 'react-redux';
 import { ContactsList, Button } from './Contacts.styled';
-import PropTypes from 'prop-types';
+import { getContacts } from 'redux/selectors';
+// import PropTypes from 'prop-types';
 
-const Contacts = ({ contacts, onClick, filterValue }) => {
-  const filteredContacts = contacts.filter(contact =>
+
+const Contacts = ({onClick, filterValue }) => {
+  const stateContacts = useSelector(getContacts);
+  console.log(stateContacts)
+  const filteredContacts = stateContacts?.filter(contact =>
     contact.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
@@ -24,16 +29,15 @@ const Contacts = ({ contacts, onClick, filterValue }) => {
   );
 };
 
-Contacts.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onClick: PropTypes.func,
-  filter: PropTypes.string,
-};
-
+// Contacts.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ),
+//   onClick: PropTypes.func,
+//   filter: PropTypes.string,
+// };
 export default Contacts;
