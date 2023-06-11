@@ -1,30 +1,35 @@
-import { useSelector } from 'react-redux';
-import { ContactsList, Button } from './Contacts.styled';
-import { getContacts } from 'redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { ContactList, Button } from './Contacts.styled';
+import { getContacts, getFilterValue } from 'redux/selectors';
+import { deleteContact } from 'redux/contactsSlice';
+import { RiDeleteBack2Fill } from 'react-icons/ri';
 // import PropTypes from 'prop-types';
 
-
-const Contacts = ({onClick, filterValue }) => {
+const Contacts = () => {
+  const dispatch = useDispatch();
   const stateContacts = useSelector(getContacts);
-  console.log(stateContacts)
+  const stateFilterValue = useSelector(getFilterValue);
   const filteredContacts = stateContacts?.filter(contact =>
-    contact.name.toLowerCase().includes(filterValue.toLowerCase())
+    contact.name.toLowerCase().includes(stateFilterValue.toLowerCase())
   );
 
   return (
     <div>
-      <ContactsList>
+      <ContactList>
         {filteredContacts.map(contact => {
           return (
             <li key={contact.id}>
               {contact.name} : {contact.number}
-              <Button type="button" onClick={() => onClick(contact.id)}>
-                Delete
+              <Button
+                type="button"
+                onClick={() => dispatch(deleteContact(contact.id))}
+              >
+                <RiDeleteBack2Fill color="darkblue" />
               </Button>
             </li>
           );
         })}
-      </ContactsList>
+      </ContactList>
     </div>
   );
 };

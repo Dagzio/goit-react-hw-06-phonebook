@@ -1,65 +1,58 @@
-import { Formik } from 'formik';
 import { CurrentForm, Input, Button, Label } from './ContactForm.styled';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
+import { BsFillTelephonePlusFill } from 'react-icons/bs';
+import { useForm } from 'react-hook-form';
+import { getContacts } from 'redux/selectors';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const [contactInfo, setContactInfo] = useState({
-    contactName: '',
-    contactNumber: '',
-  });
+  const { register, handleSubmit, reset } = useForm();
+  const stateContacts = useSelector(getContacts);
 
-  const handleChange = e => {
-    setContactInfo({
-      ...contactInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = () => {
-    formReset();
-    // dispatch(addContact({contactInfo.contactName, contactInfo.contactNumber}));
-  };
-
-  const formReset = () => {
-    setContactInfo({
+  const onSubmitForm = contactInfo => {
+    const duplicateName = stateContacts.find(
+      contact => contact.name === contactInfo.name
+    );
+    duplicateName
+      ? alert(contactInfo.name + ' is already in your contacts')
+      : dispatch(addContact(contactInfo));
+    reset({
       name: '',
       number: '',
     });
   };
 
   return (
-    <Formik initialValues={contactInfo} onSubmit={handleSubmit}>
-      <CurrentForm>
-        <Label htmlFor="contactName">Name</Label>
+    <CurrentForm onSubmit={handleSubmit(onSubmitForm)}>
+      <Label>
+        Name
         <Input
           type="text"
-          name="contactName"
+          {...register('name')}
           id="name"
-          onChange={handleChange}
-          value={contactInfo.contactName}
+          placeholder="For example Jacob Mercer"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-
-        <Label htmlFor="contactNumber">Number</Label>
+      </Label>
+      <Label>
+        Number
         <Input
           type="tel"
-          name="contactNumber"
+          {...register('number')}
           id="number"
-          onChange={handleChange}
-          value={contactInfo.contactNumber}
+          placeholder="Starts with '+'"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-
-        <Button type="submit">Add to contact</Button>
-      </CurrentForm>
-    </Formik>
+      </Label>
+      <Button type="submit">
+        Add to contact <BsFillTelephonePlusFill size="10px" />
+      </Button>
+    </CurrentForm>
   );
 };
 export default ContactForm;
