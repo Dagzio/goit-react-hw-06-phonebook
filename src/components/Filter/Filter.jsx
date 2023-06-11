@@ -1,7 +1,8 @@
 import { onChangeFilter } from 'redux/contactsSlice';
-import { Input } from './Filter.styled';
+import { FilterLabel, Input } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilterValue } from 'redux/selectors';
+import { RiContactsFill } from 'react-icons/ri';
 // import PropTypes from 'prop-types';
 
 const Filter = () => {
@@ -13,8 +14,13 @@ const Filter = () => {
   };
 
   return (
-    <label>
-      Find contacts by name <br />
+    <FilterLabel>
+      Find contacts by name
+      <RiContactsFill
+        size="12px"
+        style={{ position: 'absolute', top: '13px', marginLeft: '4px' }}
+      />
+      <br />
       <Input
         type="text"
         name="name"
@@ -22,7 +28,7 @@ const Filter = () => {
         value={stateFilterValue}
         placeholder="Type contact name. . ."
       />
-    </label>
+    </FilterLabel>
   );
 };
 

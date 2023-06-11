@@ -26,7 +26,7 @@ const ContactForm = () => {
   return (
     <CurrentForm onSubmit={handleSubmit(onSubmitForm)}>
       <Label>
-        Name
+        Name:
         <Input
           type="text"
           {...register('name')}
@@ -38,7 +38,7 @@ const ContactForm = () => {
         />
       </Label>
       <Label>
-        Number
+        Number:
         <Input
           type="tel"
           {...register('number')}

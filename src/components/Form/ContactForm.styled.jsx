@@ -20,6 +20,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   width: 180px;
   margin-bottom: 20px;
+  padding: 2px 4px;
 `;
 
 export const Button = styled.button`
