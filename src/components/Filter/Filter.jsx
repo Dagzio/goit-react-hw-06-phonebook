@@ -3,7 +3,6 @@ import { FilterLabel, Input } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilterValue } from 'redux/selectors';
 import { RiContactsFill } from 'react-icons/ri';
-// import PropTypes from 'prop-types';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -31,10 +30,5 @@ const Filter = () => {
     </FilterLabel>
   );
 };
-
-// Filter.propTypes = {
-//   onChange: PropTypes.func.isRequired,
-//   value: PropTypes.string,
-// };
 
 export default Filter;

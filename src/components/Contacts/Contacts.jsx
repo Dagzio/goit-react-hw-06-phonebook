@@ -3,7 +3,6 @@ import { ContactList, Button } from './Contacts.styled';
 import { getContacts, getFilterValue } from 'redux/selectors';
 import { deleteContact } from 'redux/contactsSlice';
 import { RiDeleteBack2Fill } from 'react-icons/ri';
-// import PropTypes from 'prop-types';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -34,15 +33,4 @@ const Contacts = () => {
   );
 };
 
-// Contacts.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onClick: PropTypes.func,
-//   filter: PropTypes.string,
-// };
 export default Contacts;
